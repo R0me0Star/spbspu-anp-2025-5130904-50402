@@ -24,3 +24,37 @@ public:
 
 	virtual ~Shape() = default;
 };
+
+class Rectangle : public Shape {
+private: 
+	rectangle_t frame;
+};
+public:
+	Rectangle(const point_t& center, double width, double height) {
+		frame.pos = center;
+		frame.width = width;
+		frame.height = height;
+	}
+
+	double get Area() const override {
+		return frame.width * frame.height;
+	}
+
+	rectangle_t getFrameRect() const override {
+		return frame;
+	}
+
+	void move(const point_t& pos) override {
+		frame.pos = pos;
+	}
+
+	void move(double dx, double dy) override {
+		frame.pos.x += dx;
+		frame.pos.y += dy;
+	}
+
+	void scale(double k) override {
+		if (k < 0.0) return;
+		frame.width *= k;
+		frame.height *= k;
+	}
