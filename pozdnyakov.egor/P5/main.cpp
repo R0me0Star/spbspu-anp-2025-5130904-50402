@@ -155,3 +155,20 @@ namespace pozdnyakov {
 		}
 	};
 }
+
+int main() {
+	using namespace pozdnyakov;
+
+	Shape** shapes = new Shape * [3];
+
+	shapes[0] = new Rectangle({ 0, 0 }, 10, 5);
+	shapes[1] = new Diamond({ 10, 0 }, 10, 10);
+	shapes[2] = new Triangle({ 0, 0 }, { 5, 10 }, { 10, 0 });
+
+	for (int i = 0; i < 3; ++i) {
+		delete shapes[i];
+	}
+	delete[] shapes;
+
+	return 0;
+}
