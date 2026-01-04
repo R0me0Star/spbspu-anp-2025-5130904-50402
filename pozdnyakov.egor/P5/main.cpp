@@ -58,3 +58,38 @@ public:
 		frame.width *= k;
 		frame.height *= k;
 	}
+
+class Diamond : public Shape {
+private:
+	point_t center;
+	double diag_h;
+	double diag_v;
+
+public:
+	Diamond(const point_t& center, double diag_h, double diag_v)
+		: center(center), diag_h(diag_h), diag_v(diag_v) {
+	}
+
+	double getArea() const override {
+		return (diag_h * diag_v) / 2.0;
+	}
+
+	rectangle_t getFrameRect() const override {
+		return { diag_h, diag_v, center };
+	}
+
+	void move(const point_t& pos) override {
+		center = pos;
+	}
+
+	void move(double dx, double dy) override {
+		center.x += dx;
+		center.y += dy;
+	}
+
+	void scale(double k) override {
+		if (k < 0.0) return;
+		diag_h *= k;
+		diag_v *= k;
+	}
+};
